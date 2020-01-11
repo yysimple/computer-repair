@@ -1,0 +1,33 @@
+server:
+  port: 6789
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///computer?useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
+    hikari:
+      max-lifetime: 30000
+      minimum-idle: 3
+      maximum-pool-size: 10
+      connection-test-query: SELECT 1
+
+  # 测试时，控制台彩色日志
+  output:
+    ansi:
+      enabled: always
+# mybatis-plus 相关配置
+mybatis-plus:
+  type-aliases-package: cn.jxwxkj.business.entity
+  mapper-locations: classpath*:mybatis/mapper/*.xml
+  # mybatis-plus 的全局配置
+  global-config:
+    banner: false
+  # mybatis 原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+    lazy-loading-enabled: false
+logging:
+  level:
+    cn.jxwxkj: info
