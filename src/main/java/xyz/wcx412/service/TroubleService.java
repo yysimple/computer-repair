@@ -1,5 +1,6 @@
 package xyz.wcx412.service;
 
+import xyz.wcx412.bean.ResultBody;
 import xyz.wcx412.entity.Trouble;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,12 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface TroubleService extends IService<Trouble> {
 
+    /**
+     * 功能描述: 添加故障信息
+     *
+     * @param trouble
+     * @return xyz.wcx412.bean.ResultBody
+     * @Author wcx
+     **/
+    ResultBody addTrouble(Trouble trouble);
 }

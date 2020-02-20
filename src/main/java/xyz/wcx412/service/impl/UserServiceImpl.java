@@ -1,19 +1,25 @@
 package xyz.wcx412.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import xyz.wcx412.bean.ResultBody;
+import xyz.wcx412.entity.PersonalInfo;
 import xyz.wcx412.entity.User;
 import xyz.wcx412.enums.ResultTypeEnum;
 import xyz.wcx412.mapper.UserMapper;
+import xyz.wcx412.service.PersonalInfoService;
 import xyz.wcx412.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -35,6 +41,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private PersonalInfoService personalInfoService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -66,13 +75,25 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             return ResultBodyUtil.error(ResultTypeEnum.USER_ALREADY_EXIST.getCode(),
             ResultTypeEnum.USER_ALREADY_EXIST.getMsg());
         }
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setPassword(encoder.encode(user.getPassword()));
         userMapper.insert(user);
+        PersonalInfo personalInfo = new PersonalInfo();
+        personalInfo.setUserId(user.getId());
+        personalInfoService.save(personalInfo);
         return ResultBodyUtil.success();
     }
 
     @Override
     public ResultBody findAllUsers() {
         return ResultBodyUtil.success(userMapper.selectList(null));
+    }
+
+    @Override
+    public ResultBody findAllUsersByPage(Integer currentPage, Integer pageSize) {
+        Page<User> page = new Page(currentPage, pageSize);
+        IPage iPage = this.page(page);
+        return ResultBodyUtil.success(iPage);
     }
 
     @Override

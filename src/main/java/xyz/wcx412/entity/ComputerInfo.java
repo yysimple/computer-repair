@@ -51,5 +51,8 @@ public class ComputerInfo extends BaseEntity implements Serializable {
     @ApiModelProperty(value = "电脑的图片")
     private String url;
 
+    @ApiModelProperty(value = "电脑的状态,默认为1,1是未卖出")
+    private Integer status;
+
 
 }

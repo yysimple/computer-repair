@@ -62,10 +62,10 @@ public class UserController {
                     ResultTypeEnum.USER_BE_DISABLED.getMsg());
         }
 
-        if (!user.getPassword().equals(secretPassword)) {
+        /*if (!user.getPassword().equals(secretPassword)) {
             return ResultBodyUtil.error(ResultTypeEnum.PASSWORD_NOT_TRUE.getCode(),
                     ResultTypeEnum.PASSWORD_NOT_TRUE.getMsg());
-        }
+        }*/
         Visitor visitor = new Visitor();
         visitor.setUserId(user.getId());
         visitor.setUsername(user.getUsername());
@@ -133,6 +133,12 @@ public class UserController {
     @PostMapping("/changeStatus")
     public ResultBody changeStatus(Long id) {
         return userService.changeStatus(id);
+    }
+
+    @ApiOperation(value = "分页查找所有用户")
+    @GetMapping("/findAllUsersByPage")
+    public ResultBody findAllUsersByPage(Integer currentPage, Integer pageSize){
+        return userService.findAllUsersByPage(currentPage, pageSize);
     }
 
 }

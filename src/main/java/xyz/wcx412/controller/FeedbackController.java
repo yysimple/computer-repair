@@ -1,9 +1,18 @@
 package xyz.wcx412.controller;
 
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.models.auth.In;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
+import xyz.wcx412.bean.ResultBody;
+import xyz.wcx412.entity.Feedback;
+import xyz.wcx412.service.FeedbackService;
+import xyz.wcx412.utils.ResultBodyUtil;
 
 /**
  * <p>
@@ -15,6 +24,34 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/feedback")
+@Api(tags = "意见反馈接口")
 public class FeedbackController {
+
+    @Autowired
+    private FeedbackService feedbackService;
+
+    @ApiOperation(value = "添加新的问题")
+    @PostMapping("/addQuestion")
+    public ResultBody addQuestion(Feedback feedback) {
+        return feedbackService.addQuestion(feedback);
+    }
+
+    @ApiOperation(value = "回答问题")
+    @PostMapping("/addAnswer")
+    public ResultBody addAnswer(Long questionId, String answer) {
+        return feedbackService.addAnswer(questionId, answer);
+    }
+
+    @ApiOperation(value = "不传状态为查询所有问题，0为未回答")
+    @GetMapping("/findAllFeedbackByPage")
+    public ResultBody findAllFeedbackByPage(Integer currentPage, Integer pageSize, Integer status){
+        return feedbackService.findAllFeedbackByPage(currentPage, pageSize, status);
+    }
+
+    @ApiOperation(value = "根据id删除该条留言")
+    @PostMapping("/deleteFeedbackById")
+    public ResultBody deleteFeedbackById(Integer feedbackId){
+        return ResultBodyUtil.success(feedbackService.removeById(feedbackId));
+    }
 
 }

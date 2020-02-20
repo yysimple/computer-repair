@@ -2,16 +2,8 @@ server:
   port: 6543
 
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql:///computer?useSSL=false&serverTimezone=UTC
-    username: root
-    password: 123456
-    hikari:
-      max-lifetime: 30000
-      minimum-idle: 3
-      maximum-pool-size: 10
-      connection-test-query: SELECT 1
+  profiles:
+    active: dev
 
   # 测试时，控制台彩色日志
   output:

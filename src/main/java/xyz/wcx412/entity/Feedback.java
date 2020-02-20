@@ -34,6 +34,12 @@ public class Feedback extends BaseEntity implements Serializable {
     @ApiModelProperty(value = "回答的内容")
     private String answer;
 
+    @ApiModelProperty(value = "留言的状态，默认为0,0是未回答")
+    private Integer status;
+
+    @ApiModelProperty(value = "问题截图")
+    private String url;
+
 
 
 }

@@ -22,7 +22,7 @@ public final class FileUploaderUtil {
         }
         try {
             //连接
-            MinioClient minioClient = new MinioClient("http://192.168.109.132:9000", "wcx", "970412@wcx.com");
+            MinioClient minioClient = new MinioClient("http://49.235.107.34:9000", "minioadmin", "minioadmin");
             //是否存在名为“test”的bucket
             if (!minioClient.bucketExists("computer")) {
                 minioClient.makeBucket("computer");

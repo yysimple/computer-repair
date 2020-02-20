@@ -22,7 +22,11 @@ public enum ResultTypeEnum {
     USER_ALREADY_EXIST(301, "用户已存在"),
     USER_BE_DISABLED(302, "用户被禁用"),
     PASSWORD_NOT_TRUE(303, "密码不正确"),
-    OLD_PASSWORD_FALSE(304, "旧密码不正确，请从新输入")
+    OLD_PASSWORD_FALSE(304, "旧密码不正确，请从新输入"),
+
+    TROUBLE_ALREADY_EXIST(400, "故障名已存在，请从新输入"),
+
+    COMPUTER_NO_EXIST(500, "电脑编号唯一，请从新输入")
     ;
     private Integer code;
 

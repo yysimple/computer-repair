@@ -34,6 +34,16 @@ public interface UserService extends IService<User>, UserDetailsService {
     ResultBody findAllUsers();
 
     /**
+     * 功能描述: 分页查找所有用户
+     *
+     * @param currentPage
+     * @param pageSize
+     * @return xyz.wcx412.bean.ResultBody
+     * @Author wcx
+     **/
+    ResultBody findAllUsersByPage(Integer currentPage, Integer pageSize);
+
+    /**
      * 功能描述: 通过用户名找到对应用户
      *
      * @param username
