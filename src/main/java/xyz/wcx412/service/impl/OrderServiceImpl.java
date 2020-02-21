@@ -2,7 +2,6 @@ package xyz.wcx412.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -10,7 +9,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import xyz.wcx412.bean.ResultBody;
 import xyz.wcx412.entity.ComputerInfo;
-import xyz.wcx412.entity.Order;
+import xyz.wcx412.entity.OrderInfo;
 import xyz.wcx412.entity.Trouble;
 import xyz.wcx412.entity.User;
 import xyz.wcx412.form.OrderForm;
@@ -38,7 +37,7 @@ import java.util.List;
  * @since 2020-01-30
  */
 @Service
-public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements OrderService {
+public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderInfo> implements OrderService {
 
     @Autowired
     private OrderMapper orderMapper;
@@ -55,7 +54,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @Override
     public ResultBody findAllOrderByPageAndFuzzy(Integer currentPage, Integer pageSize, OrderForm orderForm) {
         PageHelper.startPage(currentPage, pageSize);
-        QueryWrapper<Order> queryWrapper = Wrappers.query();
+        QueryWrapper<OrderInfo> queryWrapper = Wrappers.query();
         if (!StrUtil.hasBlank(orderForm.getStartTime(), orderForm.getEndTime())) {
             LocalDateTime startTime = DateFormatConvertUtil.startTime(orderForm.getStartTime());
             LocalDateTime endTime = DateFormatConvertUtil.endTime(orderForm.getEndTime());
@@ -64,14 +63,14 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         if (!StrUtil.isEmptyIfStr(orderForm.getStatus())) {
             queryWrapper.eq("status", orderForm.getStatus());
         }
-        List<Order> orders = orderMapper.selectList(queryWrapper);
+        List<OrderInfo> orderInfos = orderMapper.selectList(queryWrapper);
         List<OrderVo> orderVos = new ArrayList<>();
-        for (Order order : orders) {
+        for (OrderInfo orderInfo : orderInfos) {
             OrderVo orderVo = new OrderVo();
-            BeanUtils.copyProperties(order, orderVo);
-            User user = userService.getById(order.getUserId());
-            Trouble trouble = troubleService.getById(order.getTroubleId());
-            ComputerInfo computerInfo = computerInfoService.getById(order.getComputerId());
+            BeanUtils.copyProperties(orderInfo, orderVo);
+            User user = userService.getById(orderInfo.getUserId());
+            Trouble trouble = troubleService.getById(orderInfo.getTroubleId());
+            ComputerInfo computerInfo = computerInfoService.getById(orderInfo.getComputerId());
             orderVo.setComputerNo(computerInfo.getComputerNo());
             orderVo.setUsername(user.getUsername());
             orderVo.setTroubleNo(trouble.getTroubleNo());

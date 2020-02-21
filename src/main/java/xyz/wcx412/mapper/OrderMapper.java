@@ -1,7 +1,7 @@
 package xyz.wcx412.mapper;
 
 import org.springframework.stereotype.Repository;
-import xyz.wcx412.entity.Order;
+import xyz.wcx412.entity.OrderInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -13,6 +13,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2020-01-30
  */
 @Repository
-public interface OrderMapper extends BaseMapper<Order> {
+public interface OrderMapper extends BaseMapper<OrderInfo> {
 
 }

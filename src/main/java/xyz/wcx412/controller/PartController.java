@@ -50,4 +50,10 @@ public class PartController {
         partService.updateById(part);
         return ResultBodyUtil.success();
     }
+
+    @ApiOperation(value = "查询所有的零件")
+    @GetMapping("/findAllPart")
+    public ResultBody findAllPart(){
+        return ResultBodyUtil.success(partService.list());
+    }
 }

@@ -1,7 +1,7 @@
 package xyz.wcx412.service;
 
 import xyz.wcx412.bean.ResultBody;
-import xyz.wcx412.entity.Order;
+import xyz.wcx412.entity.OrderInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
 import xyz.wcx412.form.OrderForm;
 
@@ -13,7 +13,7 @@ import xyz.wcx412.form.OrderForm;
  * @author wcx
  * @since 2020-01-30
  */
-public interface OrderService extends IService<Order> {
+public interface OrderService extends IService<OrderInfo> {
 
     /**
      * 功能描述: 分页且模糊查找所有订单

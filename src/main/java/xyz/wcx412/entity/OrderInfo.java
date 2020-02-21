@@ -20,7 +20,7 @@ import xyz.wcx412.entity.base.BaseEntity;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value="Order对象", description="订单")
-public class Order extends BaseEntity implements Serializable {
+public class OrderInfo extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

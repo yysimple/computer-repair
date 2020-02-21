@@ -45,6 +45,12 @@ public class FeedbackController {
         return feedbackService.findAllFeedbackByPage(currentPage, pageSize, status);
     }
 
+    @ApiOperation(value = "查询所有意见反馈")
+    @GetMapping("/findAllFeedback")
+    public ResultBody findAllFeedback(){
+        return ResultBodyUtil.success(feedbackService.list());
+    }
+
     @ApiOperation(value = "根据id删除该条留言")
     @PostMapping("/deleteFeedbackById")
     public ResultBody deleteFeedbackById(Integer feedbackId){

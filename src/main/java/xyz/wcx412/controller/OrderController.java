@@ -1,15 +1,14 @@
 package xyz.wcx412.controller;
 
 
-import com.sun.org.apache.xpath.internal.operations.Or;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import xyz.wcx412.bean.ResultBody;
-import xyz.wcx412.entity.Order;
+import xyz.wcx412.entity.OrderInfo;
 import xyz.wcx412.form.OrderForm;
+import xyz.wcx412.mapper.OrderMapper;
 import xyz.wcx412.service.OrderService;
 import xyz.wcx412.utils.ResultBodyUtil;
 
@@ -29,6 +28,9 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private OrderMapper orderMapper;
+
     /**
      * 状态为0, 0为未处理
      */
@@ -43,14 +45,14 @@ public class OrderController {
     @ApiOperation(value = "改变订单状态,0为未处理")
     @PostMapping("/changeStatus")
     public ResultBody changeStatus(Integer status){
-        Order order = new Order();
+        OrderInfo orderInfo = new OrderInfo();
         if (STATUS_ZERO == status) {
-            order.setStatus(1);
-            orderService.updateById(order);
+            orderInfo.setStatus(1);
+            orderService.updateById(orderInfo);
             return ResultBodyUtil.success();
         }
-        order.setStatus(0);
-        orderService.updateById(order);
+        orderInfo.setStatus(0);
+        orderService.updateById(orderInfo);
         return ResultBodyUtil.success();
     }
 
@@ -62,13 +64,19 @@ public class OrderController {
 
     @ApiOperation(value = "修改订单信息")
     @PostMapping("/updateOrder")
-    public ResultBody updateOrder(@RequestBody Order order){
-        return ResultBodyUtil.success(orderService.updateById(order));
+    public ResultBody updateOrder(@RequestBody OrderInfo orderInfo){
+        return ResultBodyUtil.success(orderService.updateById(orderInfo));
     }
 
     @ApiOperation(value = "创建新的订单")
     @PostMapping("/addOrder")
-    public ResultBody addOrder(@RequestBody Order order){
-        return ResultBodyUtil.success(orderService.save(order));
+    public ResultBody addOrder(@RequestBody OrderInfo orderInfo){
+        return ResultBodyUtil.success(orderService.save(orderInfo));
+    }
+
+    @ApiOperation(value = "查询所有订单")
+    @GetMapping("/findAllOrder")
+    public ResultBody findAllOrder(){
+        return ResultBodyUtil.success(orderService.list());
     }
 }
