@@ -15,4 +15,12 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 @Repository
 public interface UserMapper extends BaseMapper<User> {
 
+    /**
+     * 功能描述: 通过用户名查找用户
+     *
+     * @Author wcx
+     * @param username
+     * @return xyz.wcx412.entity.User
+     **/
+    User findUserByUsername(String username);
 }
