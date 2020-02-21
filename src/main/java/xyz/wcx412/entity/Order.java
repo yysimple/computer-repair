@@ -28,7 +28,7 @@ public class Order extends BaseEntity implements Serializable {
     private Long userId;
 
     @ApiModelProperty(value = "对应的电脑的id")
-    private Long computerInfoId;
+    private Long computerId;
 
     @ApiModelProperty(value = "对应的问题id")
     private Long troubleId;

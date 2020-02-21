@@ -72,4 +72,12 @@ public interface ComputerInfoService extends IService<ComputerInfo> {
                                               ComputerForm computerForm);
 
 
+    /**
+     * 功能描述: 通过用户id查询所有电脑
+     *
+     * @param userId
+     * @return xyz.wcx412.bean.ResultBody
+     * @Author wcx
+     **/
+    ResultBody findComputerByUserId(Long userId);
 }

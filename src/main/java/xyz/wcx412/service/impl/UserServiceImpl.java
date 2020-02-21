@@ -120,11 +120,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public ResultBody changePwd(Long id, String oldPwd, String newPwd) {
         User user = userMapper.selectById(id);
-        if (!user.getPassword().equals(oldPwd)) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        if (!encoder.matches(oldPwd, user.getPassword())) {
             return ResultBodyUtil.error(ResultTypeEnum.OLD_PASSWORD_FALSE.getCode(),
                     ResultTypeEnum.OLD_PASSWORD_FALSE.getMsg());
         }
-        user.setPassword(newPwd);
+        user.setPassword(encoder.encode(newPwd));
         userMapper.insert(user);
         return ResultBodyUtil.success();
     }

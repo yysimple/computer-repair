@@ -110,4 +110,12 @@ public class ComputerInfoServiceImpl extends ServiceImpl<ComputerInfoMapper, Com
         IPage<ComputerInfo> iPage = computerInfoMapper.selectPage(page, queryWrapper);
         return ResultBodyUtil.success(iPage);
     }
+
+    @Override
+    public ResultBody findComputerByUserId(Long userId) {
+        QueryWrapper<ComputerInfo> queryWrapper = Wrappers.query();
+        queryWrapper.eq("user_id" ,userId);
+        List<ComputerInfo> computerInfos = computerInfoMapper.selectList(queryWrapper);
+        return ResultBodyUtil.success(computerInfos);
+    }
 }

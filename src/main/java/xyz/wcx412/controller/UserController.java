@@ -6,11 +6,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
 import xyz.wcx412.bean.ResultBody;
 import xyz.wcx412.entity.User;
 import xyz.wcx412.entity.Visitor;
@@ -52,7 +49,6 @@ public class UserController {
     public ResultBody login(String username, String password) {
         User user = userService.findUserByUserName(username);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String secretPassword = encoder.encode(password);
         if (null == user) {
             return ResultBodyUtil.error(ResultTypeEnum.USER_NOT_EXIST.getCode(),
                     ResultTypeEnum.USER_NOT_EXIST.getMsg());
@@ -62,10 +58,10 @@ public class UserController {
                     ResultTypeEnum.USER_BE_DISABLED.getMsg());
         }
 
-        /*if (!user.getPassword().equals(secretPassword)) {
+        if (!encoder.matches(password, user.getPassword())) {
             return ResultBodyUtil.error(ResultTypeEnum.PASSWORD_NOT_TRUE.getCode(),
                     ResultTypeEnum.PASSWORD_NOT_TRUE.getMsg());
-        }*/
+        }
         Visitor visitor = new Visitor();
         visitor.setUserId(user.getId());
         visitor.setUsername(user.getUsername());
@@ -95,13 +91,13 @@ public class UserController {
 
     @ApiOperation(value = "添加一个用户, 同注册")
     @PostMapping("/save")
-    public ResultBody addUser(User user){
+    public ResultBody addUser(@RequestBody User user){
         return userService.addUser(user);
     }
 
     @ApiOperation(value = "修改一个用户信息")
     @PostMapping("/updateUser")
-    public ResultBody updateUser(User user){
+    public ResultBody updateUser(@RequestBody User user){
         return ResultBodyUtil.success(userMapper.updateById(user));
     }
 

@@ -6,11 +6,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
 import xyz.wcx412.bean.ResultBody;
 import xyz.wcx412.entity.Trouble;
 import xyz.wcx412.service.TroubleService;
@@ -54,7 +51,7 @@ public class TroubleController {
 
     @ApiOperation(value = "添加故障信息")
     @PostMapping("/addTroubleInfo")
-    public ResultBody addTroubleInfo(Trouble trouble){
+    public ResultBody addTroubleInfo(@RequestBody Trouble trouble){
         return troubleService.addTrouble(trouble);
     }
 

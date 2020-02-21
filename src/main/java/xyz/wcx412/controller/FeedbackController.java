@@ -5,10 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import xyz.wcx412.bean.ResultBody;
 import xyz.wcx412.entity.Feedback;
 import xyz.wcx412.service.FeedbackService;
@@ -32,7 +29,7 @@ public class FeedbackController {
 
     @ApiOperation(value = "添加新的问题")
     @PostMapping("/addQuestion")
-    public ResultBody addQuestion(Feedback feedback) {
+    public ResultBody addQuestion(@RequestBody Feedback feedback) {
         return feedbackService.addQuestion(feedback);
     }
 

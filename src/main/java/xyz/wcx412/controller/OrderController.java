@@ -5,11 +5,8 @@ import com.sun.org.apache.xpath.internal.operations.Or;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
 import xyz.wcx412.bean.ResultBody;
 import xyz.wcx412.entity.Order;
 import xyz.wcx412.form.OrderForm;
@@ -39,7 +36,7 @@ public class OrderController {
 
     @ApiOperation(value = "查询所有订单")
     @GetMapping("/findAllOrderByPageAndFuzzy")
-    public ResultBody findAllOrderByPageAndFuzzy(Integer currentPage, Integer pageSize, OrderForm orderForm){
+    public ResultBody findAllOrderByPageAndFuzzy(Integer currentPage, Integer pageSize, @RequestBody OrderForm orderForm){
         return orderService.findAllOrderByPageAndFuzzy(currentPage, pageSize, orderForm);
     }
 
@@ -65,7 +62,13 @@ public class OrderController {
 
     @ApiOperation(value = "修改订单信息")
     @PostMapping("/updateOrder")
-    public ResultBody updateOrder(Order order){
+    public ResultBody updateOrder(@RequestBody Order order){
         return ResultBodyUtil.success(orderService.updateById(order));
+    }
+
+    @ApiOperation(value = "创建新的订单")
+    @PostMapping("/addOrder")
+    public ResultBody addOrder(@RequestBody Order order){
+        return ResultBodyUtil.success(orderService.save(order));
     }
 }

@@ -4,11 +4,8 @@ package xyz.wcx412.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
 import xyz.wcx412.bean.ResultBody;
 import xyz.wcx412.entity.ComputerInfo;
 import xyz.wcx412.form.ComputerForm;
@@ -37,7 +34,7 @@ public class ComputerInfoController {
         return computerInfoService.addComputer(computerInfo);
     }
 
-    @ApiOperation(value = "用户购买手机")
+    @ApiOperation(value = "用户购买电脑")
     @PostMapping("/buyComputer")
     public ResultBody buyComputer(Long computerId, Long userId){
         return computerInfoService.buyComputer(computerId, userId);
@@ -61,9 +58,15 @@ public class ComputerInfoController {
         return ResultBodyUtil.success(computerInfoService.list());
     }
 
+    @ApiOperation(value = "查找所有电脑通过用户id")
+    @GetMapping("/findComputerByUserId")
+    public ResultBody findComputerByUserId(Long userId){
+        return computerInfoService.findComputerByUserId(userId);
+    }
+
     @ApiOperation(value = "分页并模糊胡查询")
     @GetMapping("/findAllComputerByPageAndFuzzy")
-    public ResultBody findAllComputerByPageAndFuzzy(Integer currentPage, Integer pageSize, ComputerForm computerForm){
+    public ResultBody findAllComputerByPageAndFuzzy(Integer currentPage, Integer pageSize, @RequestBody ComputerForm computerForm){
         return computerInfoService.findAllComputerByPageAndFuzzyAndStatus(currentPage, pageSize, computerForm);
     }
 
@@ -71,13 +74,13 @@ public class ComputerInfoController {
     @GetMapping("/findAllByUserIdAndPageAndFuzzy")
     public ResultBody findAllByUserIdAndPageAndFuzzy(Integer currentPage, Integer pageSize,
                                                      Long userId,
-                                                     ComputerForm computerForm){
+                                                     @RequestBody ComputerForm computerForm){
         return computerInfoService.findAllByUserIdAndPageAndFuzzy(currentPage, pageSize, userId, computerForm);
     }
 
     @ApiOperation(value = "更新电脑信息")
     @PostMapping("/updateComputer")
-    public ResultBody updateComputer(ComputerInfo computerInfo){
+    public ResultBody updateComputer(@RequestBody ComputerInfo computerInfo){
         return ResultBodyUtil.success(computerInfoService.updateById(computerInfo));
     }
 
