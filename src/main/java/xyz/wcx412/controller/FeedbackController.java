@@ -57,4 +57,12 @@ public class FeedbackController {
         return ResultBodyUtil.success(feedbackService.removeById(feedbackId));
     }
 
+    @ApiOperation(value = "通过用户id查询所有意见反馈")
+    @PostMapping("/findAllFeedbackByUserId")
+    public ResultBody findAllFeedbackByUserId(Long userId){
+        return feedbackService.findAllFeedbackByUserId(userId);
+    }
+
+
+
 }

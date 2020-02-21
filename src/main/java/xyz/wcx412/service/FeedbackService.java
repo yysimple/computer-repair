@@ -44,4 +44,13 @@ public interface FeedbackService extends IService<Feedback> {
      * @Author wcx
      **/
     ResultBody findAllFeedbackByPage(Integer currentPage, Integer pageSize, Integer status);
+
+    /**
+     * 功能描述: 通过用户id查询所有意见反馈
+     *
+     * @Author wcx
+     * @param userId
+     * @return xyz.wcx412.bean.ResultBody
+     **/
+    ResultBody findAllFeedbackByUserId(Long userId);
 }

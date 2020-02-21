@@ -15,6 +15,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import xyz.wcx412.utils.ResultBodyUtil;
 
+import java.util.List;
+
 /**
  * <p>
  * 意见反馈 服务实现类
@@ -51,5 +53,13 @@ public class FeedbackServiceImpl extends ServiceImpl<FeedbackMapper, Feedback> i
         }
         IPage<Feedback> iPage = feedbackMapper.selectPage(page, queryWrapper);
         return ResultBodyUtil.success(iPage);
+    }
+
+    @Override
+    public ResultBody findAllFeedbackByUserId(Long userId) {
+        QueryWrapper<Feedback> queryWrapper = Wrappers.query();
+        queryWrapper.eq("user_id", userId);
+        List<Feedback> feedbacks = feedbackMapper.selectList(queryWrapper);
+        return ResultBodyUtil.success(feedbacks);
     }
 }
