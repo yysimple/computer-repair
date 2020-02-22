@@ -10,7 +10,7 @@
     </parent>
     <groupId>xyz.wcx412</groupId>
     <artifactId>computer-repair</artifactId>
-    <version>20200221-08</version>
+    <version>20200222-02</version>
     <name>computer</name>
     <description>Demo project for Spring Boot</description>
 

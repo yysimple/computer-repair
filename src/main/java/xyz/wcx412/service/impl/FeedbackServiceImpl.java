@@ -41,6 +41,8 @@ public class FeedbackServiceImpl extends ServiceImpl<FeedbackMapper, Feedback> i
     public ResultBody addAnswer(Long questionId, String answer) {
         Feedback feedback = feedbackMapper.selectById(questionId);
         feedback.setAnswer(answer);
+        feedback.setStatus(1);
+        feedbackMapper.updateById(feedback);
         return ResultBodyUtil.success();
     }
 
