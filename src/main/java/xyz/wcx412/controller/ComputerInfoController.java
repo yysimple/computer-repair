@@ -30,7 +30,7 @@ public class ComputerInfoController {
 
     @ApiOperation(value = "添加新的电脑")
     @PostMapping("/addComputer")
-    public ResultBody addComputer(ComputerInfo computerInfo){
+    public ResultBody addComputer(@RequestBody ComputerInfo computerInfo){
         return computerInfoService.addComputer(computerInfo);
     }
 

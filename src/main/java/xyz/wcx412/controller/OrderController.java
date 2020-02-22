@@ -44,8 +44,8 @@ public class OrderController {
 
     @ApiOperation(value = "改变订单状态,0为未处理")
     @PostMapping("/changeStatus")
-    public ResultBody changeStatus(Integer status){
-        OrderInfo orderInfo = new OrderInfo();
+    public ResultBody changeStatus(Long orderId, Integer status){
+        OrderInfo orderInfo = orderMapper.selectById(orderId);
         if (STATUS_ZERO == status) {
             orderInfo.setStatus(1);
             orderService.updateById(orderInfo);

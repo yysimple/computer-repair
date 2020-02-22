@@ -36,7 +36,7 @@ public class ComputerInfoServiceImpl extends ServiceImpl<ComputerInfoMapper, Com
     public ResultBody addComputer(ComputerInfo computerInfo) {
         List<ComputerInfo> computerInfos = computerInfoMapper.selectList(null);
         boolean b = computerInfos.stream()
-                .anyMatch(computerInfo1 -> computerInfo.getComputerNo().equals(computerInfo.getComputerNo()));
+                .anyMatch(computerInfo1 -> computerInfo1.getComputerNo().equals(computerInfo.getComputerNo()));
         if (b) {
             return ResultBodyUtil.error(ResultTypeEnum.COMPUTER_NO_EXIST.getCode(),
                     ResultTypeEnum.COMPUTER_NO_EXIST.getMsg());
