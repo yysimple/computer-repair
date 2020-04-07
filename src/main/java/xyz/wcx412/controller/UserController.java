@@ -69,7 +69,7 @@ public class UserController {
         String token = userService.login(username, password);
         Map<String, Object> map = new HashMap<>(16);
         map.put("user", user);
-        map.put("token", token);
+        map.put("token", "Bearer" + token);
         return ResultBodyUtil.success(map);
 
     }

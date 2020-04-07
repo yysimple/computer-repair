@@ -58,7 +58,7 @@ public class FeedbackController {
     }
 
     @ApiOperation(value = "通过用户id查询所有意见反馈")
-    @PostMapping("/findAllFeedbackByUserId")
+    @GetMapping("/findAllFeedbackByUserId")
     public ResultBody findAllFeedbackByUserId(Long userId){
         return feedbackService.findAllFeedbackByUserId(userId);
     }

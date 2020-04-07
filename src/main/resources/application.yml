@@ -3,7 +3,7 @@ server:
 
 spring:
   profiles:
-    active: dev
+    active: local
 
   # 测试时，控制台彩色日志
   output:
@@ -23,3 +23,10 @@ mybatis-plus:
 logging:
   level:
     cn.jxwxkj: info
+
+ali:
+  oss:
+    accessKeyId: LTAI4FqsSbxAqQcfKyTfPheU
+    accessKeySecret: iGFEJYhfUjtJPXWsWuU3wGmRJ9dCBy
+    bucketName: wcx-file
+    endpoint: oss-cn-beijing.aliyuncs.com

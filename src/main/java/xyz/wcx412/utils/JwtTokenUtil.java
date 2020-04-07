@@ -39,7 +39,7 @@ public class JwtTokenUtil implements Serializable {
     /**
      * 存放Token的Header Key
      */
-    public static final String HEADER_STRING = "Authorization";
+    public static final String HEADER_STRING = "token";
 
     private static final long serialVersionUID = -5625635588908941275L;
 

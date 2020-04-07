@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://49.235.107.34:3306/computer?useSSL=false&serverTimezone=UTC
-    username: computer
-    password: computer
+    url: jdbc:mysql://localhost:3306/computer?useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
     hikari:
       max-lifetime: 30000
       minimum-idle: 3

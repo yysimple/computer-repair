@@ -70,7 +70,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderInfo> implem
             BeanUtils.copyProperties(orderInfo, orderVo);
             User user = userService.getById(orderInfo.getUserId());
             Trouble trouble = troubleService.getById(orderInfo.getTroubleId());
-            ComputerInfo computerInfo = computerInfoService.getById(orderInfo.getComputerId());
+            ComputerInfo computerInfo = computerInfoService.getById(orderInfo.getComputerInfoId());
             orderVo.setComputerNo(computerInfo.getComputerNo());
             orderVo.setUsername(user.getUsername());
             orderVo.setTroubleNo(trouble.getTroubleNo());
