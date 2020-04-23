@@ -35,8 +35,8 @@ public class FeedbackController {
 
     @ApiOperation(value = "回答问题")
     @PostMapping("/addAnswer")
-    public ResultBody addAnswer(Long questionId, String answer) {
-        return feedbackService.addAnswer(questionId, answer);
+    public ResultBody addAnswer(Long id, String answer) {
+        return feedbackService.addAnswer(id, answer);
     }
 
     @ApiOperation(value = "不传状态为查询所有问题，0为未回答")

@@ -3,7 +3,7 @@ server:
 
 spring:
   profiles:
-    active: local
+    active: dev
 
   # 测试时，控制台彩色日志
   output:

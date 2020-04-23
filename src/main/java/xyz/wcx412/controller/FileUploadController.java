@@ -2,6 +2,7 @@ package xyz.wcx412.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import xyz.wcx412.service.FileUploadService;
  */
 @RestController
 @RequestMapping("/file")
+@Slf4j
 @Api(value = "FileUploadController", tags = "文件上传接口")
 public class FileUploadController {
 
@@ -33,7 +35,8 @@ public class FileUploadController {
 
     @ApiOperation(value = "零件图片上传")
     @PostMapping("/partFileUpload")
-    public String batteryFileUpload(MultipartFile file){
+    public String partFileUpload(MultipartFile file){
+        log.info("file", file.toString());
         return fileUploadService.partImages(file);
     }
 
