@@ -26,7 +26,7 @@ logging:
 
 ali:
   oss:
-    accessKeyId: LTAI4FqsSbxAqQcfKyTfPheU
-    accessKeySecret: iGFEJYhfUjtJPXWsWuU3wGmRJ9dCBy
+    accessKeyId: your
+    accessKeySecret: your
     bucketName: wcx-file
     endpoint: oss-cn-beijing.aliyuncs.com
